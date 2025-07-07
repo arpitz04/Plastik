@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.h5
+*.keras
+*.pkl
+
+# Datasets or testing
+ml_api/dataset*
+ml_api/test*
+ml_api/train*
+ml_api/training*
+ml_api/testing*
+training_results/

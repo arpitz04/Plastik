@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"> <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <title>Upload new File</title>
+  <style>
+    body {
+      margin: 20px 60px;
+      background-image: url('./images/garbage.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.5); /* White overlay with 50% opacity */
+      z-index: -1; /* Places it behind the content */
+    }
+
+    .drop-container {
+      position: relative;
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 90vh; /* Preserving your height change */
+      width: 180vh; /* Preserving your width change */
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px dashed #555;
+      color: #444;
+      cursor: pointer;
+      transition: background .2s ease-in-out, border .2s ease-in-out;
+    }
+    
+    .drop-container:hover,
+    .drop-container.drag-active {
+      border-color: #111;
+    }
+    
+    .drop-container:hover .drop-title,
+    .drop-container.drag-active .drop-title {
+      color: #222;
+    }
+    
+    .drop-title {
+      color: #444;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      transition: color .2s ease-in-out;
+    }
+    
+    input[type=file] {
+      width: 350px;
+      max-width: 100%;
+      color: #444;
+      padding: 5px;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #555;
+    }
+    
+    input[type=file]::file-selector-button {
+      margin-right: 20px;
+      border: none;
+      background: #084cdf;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s ease-in-out;
+    }
+    
+    input[type=file]::file-selector-button:hover {
+      background: #0d45a5;
+    }
+
+    /* Styles for the image preview and messages */
+    #previewImage {
+      max-width: 100%;
+      max-height: 200px;
+      margin-top: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: none; /* Hidden by default */
+    }
+
+    .upload-message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    #mlResultDisplay {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="uploadForm">
+    <div class="drop-container" id="dropcontainer">
+      <span class="drop-title">Drop files here</span>
+      or
+      <input type="file" class="form-control" name="photo" id="imageFile" accept="image/*" required>
+      <img id="previewImage" src="" alt="Image Preview" style="max-width: 200px; max-height: 200px; margin-top: 15px; display: none;">
+      <button type="submit" class="btn btn-primary mt-3" id="uploadButton">Upload Photo</button>
+      <p id="uploadMessage" class="mt-3"></p>
+      <div id="mlResultDisplay" class="upload-message"></div>
+    </div>
+  </form>
+
+  <script>
+    // This script block handles drag-and-drop and basic file API checks.
+    const dropContainer = document.getElementById("dropcontainer");
+    const fileInput = document.getElementById("imageFile");
+    const previewImage = document.getElementById("previewImage");
+    const uploadForm = document.getElementById("uploadForm");
+    const uploadMessage = document.getElementById("uploadMessage");
+    const uploadButton = document.getElementById("uploadButton"); // Get reference to the button
+    const mlResultDisplay = document.getElementById("mlResultDisplay"); // Get reference to ML result display
+
+    // Initial state: hide preview image on page load
+    previewImage.style.display = 'none';
+
+    dropContainer.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropContainer.classList.add("drag-active");
+    }, false);
+
+    dropContainer.addEventListener("dragenter", () => {
+      dropContainer.classList.add("drag-active");
+    });
+
+    dropContainer.addEventListener("dragleave", () => {
+      dropContainer.classList.remove("drag-active");
+    });
+
+    dropContainer.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropContainer.classList.remove("drag-active");
+      fileInput.files = e.dataTransfer.files;
+      const event = new Event('change');
+      fileInput.dispatchEvent(event);
+    });
+
+    // Handle file selection and preview
+    fileInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      } else {
+        // If no file is selected (e.g., user cancels file dialog), hide preview
+        previewImage.src = '';
+        previewImage.style.display = 'none';
+      }
+    });
+
+    // Handle form submission
+    uploadForm.addEventListener('submit', async function(e) { // Added 'async' keyword
+        e.preventDefault(); // Prevent the default form submission
+
+        uploadMessage.textContent = ''; // Clear previous messages
+        mlResultDisplay.textContent = ''; // Clear previous ML results
+        uploadButton.disabled = true; // Disable button during upload
+        uploadButton.textContent = 'Uploading...'; // Change button text
+
+        const file = fileInput.files[0];
+
+        if (!file) {
+            uploadMessage.textContent = 'Please select an image to upload.';
+            uploadMessage.style.color = 'red';
+            uploadButton.disabled = false;
+            uploadButton.textContent = 'Upload Photo';
+            return;
+        }
+
+        const formData = new FormData();
+        // 'photo' must match the field name in your Multer config in photos.js
+        formData.append('photo', file); 
+
+        try {
+            // Get the user's token from localStorage (assuming it's stored after login)
+            const token = localStorage.getItem('token');
+            if (!token) {
+                uploadMessage.textContent = 'You need to be logged in to upload photos.';
+                uploadMessage.style.color = 'orange';
+                uploadButton.disabled = false;
+                uploadButton.textContent = 'Upload Photo';
+                // Optionally redirect to login page
+                // window.location.href = '/sign-in.html';
+                return;
+            }
+
+            const response = await fetch('http://localhost:5000/api/photos/upload', { // Your Node.js backend upload endpoint
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}` // Send the token for authentication
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                uploadMessage.textContent = 'Upload successful!';
+                uploadMessage.style.color = 'green';
+
+                // Display ML results
+                let resultText = `ML Result: ${data.isPlastic ? 'Plastic Detected!' : 'Not Plastic.'}`;
+                resultText += ` (Probability: ${data.mlResult !== undefined && data.mlResult !== null ? (data.mlResult * 100).toFixed(2) + '%' : 'N/A'})`;
+                resultText += ` - Points Awarded: ${data.pointsAwarded}`;
+
+                mlResultDisplay.textContent = resultText;
+                mlResultDisplay.style.color = data.isPlastic ? 'blue' : 'gray'; // Different color for plastic/non-plastic
+
+                console.log('Upload and ML processing complete:', data);
+            } else {
+                // Handle errors from the backend (e.g., Multer errors, ML service errors)
+                uploadMessage.textContent = `Upload failed: ${data.message || 'An unknown error occurred.'}`;
+                uploadMessage.style.color = 'red';
+                console.error('Upload error:', data);
+            }
+
+        } catch (error) {
+            uploadMessage.textContent = 'An error occurred during upload. Please check your network or server.';
+            uploadMessage.style.color = 'red';
+            console.error('Fetch error:', error);
+        } finally {
+            uploadButton.disabled = false; // Re-enable button
+            uploadButton.textContent = 'Upload Photo'; // Reset button text
+        }
+    });
+
+    // Check for File API support
+    // This alert will only trigger if the browser is very old or has file APIs disabled.
+    if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+      alert('The File APIs are not fully supported in this browser. Please use a modern browser.');
+    }
+  </script>
+</body>
+</html>
