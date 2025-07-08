@@ -5,6 +5,9 @@ from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
+import subprocess
+subprocess.call("pip freeze", shell=True)
+
 
 app = Flask(__name__)
 
