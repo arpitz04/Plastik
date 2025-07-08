@@ -1,6 +1,0 @@
-Flask
-tensorflow
-numpy
-pillow
-gunicorn
-gdown==5.2.0
