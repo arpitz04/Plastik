@@ -1,1 +1,5 @@
+*.keras
 ml_api/models/plastic_classifier_02.keras
+__pycache__/
+*.pyc
+.env
