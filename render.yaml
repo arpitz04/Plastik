@@ -4,7 +4,10 @@ services:
     env: python
     region: oregon
     plan: free
-    buildCommand: pip install -r requirements.txt && pip install gdown
+    buildCommand: |
+      pip install --upgrade pip
+      pip install gdown
+      pip install -r requirements.txt
     startCommand: python ml_api/ml_api.py
     envVars:
       - key: MODEL_URL
