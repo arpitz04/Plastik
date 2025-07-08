@@ -3,4 +3,4 @@ tensorflow
 numpy
 pillow
 gunicorn
-gdown
+gdown==5.2.0
