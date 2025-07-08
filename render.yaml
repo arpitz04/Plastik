@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: plastik-ml-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python ml_api/ml_api.py
+    envVars:
+      - key: MODEL_URL
+        value: https://drive.google.com/uc?export=download&id=11Yhi35TSYq1wZcYd2ReDcDB9BQL_9NN2
+    plan: free
+    region: oregon
