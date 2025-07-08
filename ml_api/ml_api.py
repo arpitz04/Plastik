@@ -1,5 +1,6 @@
 import os
 import io
+import gdown
 from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -8,9 +9,21 @@ import numpy as np
 app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
+MODEL_URL = os.environ.get("MODEL_URL")
 MODEL_PATH = os.path.join(BASE_DIR, 'models', 'plastic_classifier_02.keras')
 
+# Step 3: Download model from Google Drive if not exists
+os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+
+if not os.path.exists(MODEL_PATH):
+    try:
+        print(f"Downloading model from {MODEL_URL}...")
+        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+        print(f"Model downloaded to {MODEL_PATH}")
+    except Exception as e:
+        print(f"Error downloading model: {e}")
+
+# Load the model
 try:
     model = load_model(MODEL_PATH)
     print(f"ML model '{MODEL_PATH}' loaded successfully.")
@@ -31,7 +44,6 @@ def predict_plastic():
         return jsonify({'error': 'No selected image file'}), 400
 
     try:
-
         img_bytes = file.read()
         img = image.load_img(io.BytesIO(img_bytes), target_size=(150, 150))
         img_array = image.img_to_array(img)
@@ -42,8 +54,8 @@ def predict_plastic():
         probability = float(prediction[0][0])
 
         is_plastic = probability > 0.5
-        status = 'approved' if is_plastic else 'rejected' 
-        points = 10 if is_plastic else 0 
+        status = 'approved' if is_plastic else 'rejected'
+        points = 10 if is_plastic else 0
 
         return jsonify({
             'mlResult': probability,
