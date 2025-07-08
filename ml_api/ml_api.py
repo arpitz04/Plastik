@@ -31,6 +31,13 @@ except Exception as e:
     print(f"Error loading ML model from {MODEL_PATH}: {e}")
     model = None
 
+try:
+    import gdown
+    print("✅ gdown is installed")
+except ImportError:
+    print("❌ gdown is NOT installed")
+
+
 @app.route('/predict_plastic', methods=['POST'])
 def predict_plastic():
     if model is None:
