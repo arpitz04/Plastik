@@ -7,3 +7,4 @@ services:
     envVars:
       - key: MODEL_URL
         value: https://drive.google.com/uc?export=download&id=11Yhi35TSYq1wZcYd2ReDcDB9BQL_9NN2
+  
