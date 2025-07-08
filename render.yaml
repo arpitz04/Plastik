@@ -6,5 +6,5 @@ services:
     startCommand: python ml_api/ml_api.py
     envVars:
       - key: MODEL_URL
-        value: https://drive.google.com/uc?export=download&id=11Yhi35TSYq1wZcYd2ReDcDB9BQL_9NN2
-  
+        value: https://drive.google.com/uc?export=download&id=11Yh135TSYq1wZcYd2ReDcCDB9BQL_9NN2
+# Another temporary comment for Git test
