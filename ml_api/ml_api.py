@@ -1,6 +1,6 @@
 import os
 import io
-import gdown
+import requests
 from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -12,14 +12,24 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_URL = os.environ.get("MODEL_URL")
 MODEL_PATH = os.path.join(BASE_DIR, 'models', 'plastic_classifier_02.keras')
 
+def download_from_gdrive(url, output_path):
+    file_id = url.split("id=")[-1]
+    download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    response = requests.get(download_url)
+    if response.status_code == 200:
+        with open(output_path, 'wb') as f:
+            f.write(response.content)
+        print("Model downloaded successfully.")
+    else:
+        raise Exception(f"Failed to download model. Status code: {response.status_code}")
+
 # Step 3: Download model from Google Drive if not exists
 os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
 
 if not os.path.exists(MODEL_PATH):
     try:
         print(f"Downloading model from {MODEL_URL}...")
-        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
-        print(f"Model downloaded to {MODEL_PATH}")
+        download_from_gdrive(MODEL_URL, MODEL_PATH)
     except Exception as e:
         print(f"Error downloading model: {e}")
 
@@ -31,24 +41,14 @@ except Exception as e:
     print(f"Error loading ML model from {MODEL_PATH}: {e}")
     model = None
 
-try:
-    import gdown
-    print("✅ gdown is installed")
-except ImportError:
-    print("❌ gdown is NOT installed")
-
-
 @app.route('/predict_plastic', methods=['POST'])
 def predict_plastic():
     if model is None:
-        return jsonify({'error': 'ML model not loaded. Please check server logs for model loading errors.'}), 503
+        return jsonify({'error': 'ML model not loaded.'}), 503
     if 'image' not in request.files:
-        return jsonify({'error': 'No image file provided in the request'}), 400
+        return jsonify({'error': 'No image file provided'}), 400
 
     file = request.files['image']
-
-    if file.filename == '':
-        return jsonify({'error': 'No selected image file'}), 400
 
     try:
         img_bytes = file.read()
@@ -61,20 +61,15 @@ def predict_plastic():
         probability = float(prediction[0][0])
 
         is_plastic = probability > 0.5
-        status = 'approved' if is_plastic else 'rejected'
-        points = 10 if is_plastic else 0
-
         return jsonify({
             'mlResult': probability,
             'isPlastic': is_plastic,
-            'status': status,
-            'pointsAwarded': points,
-            'message': 'Image processed successfully.'
+            'status': 'approved' if is_plastic else 'rejected',
+            'pointsAwarded': 10 if is_plastic else 0,
         })
 
     except Exception as e:
-        print(f"Error during prediction: {e}")
-        return jsonify({'error': f'Failed to process image or make prediction: {e}'}), 500
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
