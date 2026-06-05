@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Plastik</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/slick.css"/>
+
+        <link href="css/tooplate-little-fashion.css" rel="stylesheet">
+<!--
+
+Tooplate 2127 Little Fashion
+
+https://www.tooplate.com/view/2127-little-fashion
+
+-->
+    </head>
+    
+    <body>
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="sk-inner-circle"></span>
+            </div>
+        </section>
+    
+        <main>
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="index.html">
+                        <strong>PLASTI<span>K</span></strong>
+                    </a>
+
+                    <div class="d-lg-none">
+                        <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+
+                        <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="products.html">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Upload.html">Upload</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="faq.html">FAQs</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="sign-in.html" id="signInLink">Sign In</a></li>
+                                    <li><a class="dropdown-item" href="sign-up.html" id="signUpLink">Sign Up</a></li>
+                                    <li><a class="dropdown-item" href="#" id="userProfileLink" style="display:none;"></a></li>
+                                    <li><a class="dropdown-item" href="#" id="logoutButton" style="display:none;">Logout</a></li>
+                                    <li><span class="dropdown-item" id="userPointsDisplay" style="display:none; color: green; font-weight: bold;"></span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="d-none d-lg-block">
+                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+
+                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <header class="site-header section-padding d-flex justify-content-center align-items-center">
+                <div class="container">
+                    <div class="row"id="product-listings">
+
+                        <div class="col-lg-10 col-12">
+                            <h1>
+                                <span class="d-block text-primary">Choose your</span>
+                                <span class="d-block text-dark">favorite stuffs</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="products section-padding">
+                <div class="container">
+                    <div class="row"id="product-listings">
+                        
+                        <div class="col-12">
+                            <h2 class="mb-5">Popular</h2>
+                        </div>
+
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="./images/product/bagprod.png" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <span class="product-alert me-auto">Trending</span>
+
+                                    <a href="#" class="bi-heart-fill product-icon"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="product-detail.html" class="product-title-link">Tote Bag</a>
+                                        </h5>
+
+                                        <p class="product-p">Carry Sustainability</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">500 points</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="./images/product/tableprod.png" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <span class="product-alert">Best Seller</span>
+
+                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="product-detail.html" class="product-title-link">Table</a>
+                                        </h5>
+
+                                        <p class="product-p">Recycled Beauty</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">1000 points</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-12">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="/images/product/potprod.png" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="product-detail.html" class="product-title-link">Plant Pot</a>
+                                        </h5>
+
+                                        <p class="product-p">Reuse. Replant</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">250 points</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <h2 class="mb-5">New Arrivals</h2>
+                        </div>
+
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="./images/product/crockery.png" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <span class="product-alert">New Arrival</span>
+
+                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="product-detail.html" class="product-title-link">Crockery</a>
+                                        </h5>
+
+                                        <p class="product-p">Sustainable. Dine Beautiful</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">500 points</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="./images/product/organiser.png" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="product-detail.html" class="product-title-link">Organiser</a>
+                                        </h5>
+
+                                        <p class="product-p">Package design</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">100 points</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-12 mb-3">
+                            <div class="product-thumb">
+                                <a href="product-detail.html">
+                                    <img src="./images/product/bottle.jpg" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                                </div>
+
+                                <div class="product-info d-flex">
+                                    <div>
+                                        <h5 class="product-title mb-0">
+                                            <a href="product-detail.html" class="product-title-link">Bottle</a>
+                                        </h5>
+
+                                        <p class="product-p">Refresh Reuse Quench</p>
+                                    </div>
+
+                                    <small class="product-price text-muted ms-auto">150 points</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-10 me-auto mb-4">
+                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
+                        <br>
+                        <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>
+                    </div>
+
+                    <div class="col-lg-5 col-8">
+                        <h5 class="text-white mb-3">Sitemap</h5>
+
+                        <ul class="footer-menu d-flex flex-wrap">
+                            <li class="footer-menu-item"><a href="about.html" class="footer-menu-link">Story</a></li>
+
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Products</a></li>
+
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy policy</a></li>
+
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
+
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-4">
+                        <h5 class="text-white mb-3">Social</h5>
+
+                        <ul class="social-icon">
+
+                            <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </footer> -->
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/Headroom.js"></script>
+        <script src="js/jQuery.headroom.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="js/products.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = urlParams.get('id'); // Get the 'id' from the URL
+
+                const productDetailContainer = document.getElementById('product-detail-container');
+
+                if (!productId) {
+                    if (productDetailContainer) {
+                        productDetailContainer.innerHTML = '<p class="alert alert-danger">Error: No product ID provided. Please select a product from the <a href="products.html">products page</a>.</p>';
+                    }
+                    console.error('No product ID found in URL for product-detail.html.');
+                    return; // Stop execution if no ID is found
+                }
+
+                try {
+                    // Fetch product details from your backend API
+                    const response = await fetch(`/api/products/${productId}`);
+
+                    if (!response.ok) {
+                        // If the response is not OK (e.g., 404 Not Found, 500 Internal Server Error)
+                        const errorData = await response.json(); // Try to parse error message from server
+                        if (productDetailContainer) {
+                            productDetailContainer.innerHTML = `<p class="alert alert-warning">Product not found or an error occurred: ${errorData.message || response.statusText}</p>`;
+                        }
+                        console.error('Failed to fetch product details:', response.status, errorData);
+                        return; // Stop execution
+                    }
+
+                    const product = await response.json();
+
+                    // Populate the HTML with the fetched product data
+                    if (productDetailContainer) {
+                        productDetailContainer.innerHTML = `
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <img src="${product.imageUrl}" class="img-fluid product-image" alt="${product.name}">
+                                </div>
+                                <div class="col-lg-6 col-12 mt-3 mt-lg-0">
+                                    <h2 class="mb-3">${product.name}</h2>
+                                    <p class="product-p">${product.description}</p>
+                                    <p class="product-p"><strong>Reward Points: ${product.pricePoints}</strong></p>
+                                    <p class="product-p">Stock: ${product.stock}</p>
+                                    <button type="button" class="btn custom-btn mt-3" id="redeemButton" data-product-id="${product._id}" data-product-points="${product.pricePoints}">Redeem Now</button>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // --- Add Redemption Logic for the Redeem Button ---
+                    const redeemButton = document.getElementById('redeemButton');
+                    if (redeemButton) {
+                        redeemButton.addEventListener('click', async () => {
+                            const token = localStorage.getItem('token'); // Get token from localStorage
+                            if (!token) {
+                                alert('Please sign in to redeem products.');
+                                window.location.href = 'sign-in.html'; // Redirect to sign-in page
+                                return;
+                            }
+
+                            const confirmRedeem = confirm(`Are you sure you want to redeem "${product.name}" for ${product.pricePoints} points?`);
+                            if (!confirmRedeem) {
+                                return;
+                            }
+
+                            try {
+                                const redeemResponse = await fetch('/api/products/redeem', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Authorization': `Bearer ${token}` // Include JWT token
+                                    },
+                                    body: JSON.stringify({ productId: product._id })
+                                });
+
+                                const redeemResult = await redeemResponse.json();
+
+                                if (redeemResponse.ok) {
+                                    alert(redeemResult.message || 'Product redeemed successfully!');
+                                    // You might want to update the user's points display here without a full reload
+                                    window.location.reload(); // Simplest way to refresh points/stock for now
+                                } else {
+                                    alert(redeemResult.message || 'Failed to redeem product. Check your points or server logs.');
+                                }
+                            } catch (error) {
+                                console.error('Error during redemption:', error);
+                                alert('An unexpected error occurred during redemption.');
+                            }
+                        });
+                    }
+
+                } catch (error) {
+                    console.error('An unexpected error occurred while fetching or rendering product details:', error);
+                    if (productDetailContainer) {
+                        productDetailContainer.innerHTML = '<p class="alert alert-danger">An unexpected error occurred while loading product details. Please try again later.</p>';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
